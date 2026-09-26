@@ -26,7 +26,7 @@ body {
             rgba(0, 30, 90, 0.70),
             rgba(10, 15, 50, 0.85)
         ),
-        url("foto.png?v=3");
+        url("foto.png?v=4");
 
     background-size: cover;
     background-position: center;
@@ -34,6 +34,77 @@ body {
     background-attachment: fixed;
 }
 
+/* KEDİ & PASTA GİRİŞ EKRANI (SPLASH SCREEN) */
+#intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 15, 40, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease, visibility 1s ease;
+    cursor: pointer;
+}
+
+.cat-box {
+    position: relative;
+    user-select: none;
+}
+
+.cat-emoji {
+    font-size: 110px;
+    display: block;
+    animation: kediSallan 2s ease-in-out infinite;
+}
+
+.cake-box {
+    font-size: 90px;
+    position: relative;
+    margin-top: -20px;
+    display: inline-block;
+}
+
+.flame {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 35px;
+    animation: alevKipirda 0.4s infinite alternate;
+}
+
+@keyframes kediSallan {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+@keyframes alevKipirda {
+    0% { transform: translateX(-50%) scale(1); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+}
+
+.intro-text {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffb3c6;
+    text-shadow: 0 0 12px rgba(255, 179, 198, 0.6);
+    animation: yaziYanSön 1.5s infinite;
+}
+
+@keyframes yaziYanSön {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ANA SİTE İÇERİĞİ */
 .container {
     width: 90%;
     max-width: 900px;
@@ -162,11 +233,29 @@ footer {
     .box, .music-box, .gift-box { padding: 22px; }
     .message { font-size: 17px; }
     .heart { font-size: 55px; }
+    .cat-emoji { font-size: 90px; }
+    .cake-box { font-size: 75px; }
+    .flame { font-size: 28px; top: 3px; }
+    .intro-text { font-size: 18px; }
 }
 </style>
 </head>
 
 <body>
+
+<!-- GİRİŞ EKRANI (KEDİ & PASTA) -->
+<div id="intro-screen" onclick="mumuUfle()">
+    <div class="cat-box">
+        <span class="cat-emoji">🐱</span>
+        <div class="cake-box">
+            <span id="flame" class="flame">🔥</span>
+            🎂
+        </div>
+    </div>
+    <div class="intro-text">
+        Muma tıkla ve üfle ❤️
+    </div>
+</div>
 
 <div class="container">
 
@@ -196,7 +285,7 @@ footer {
     <div class="music-box">
         <h2>🎵 Bizim Şarkımız</h2>
         <p>❤️ Bu şarkı sana...</p>
-        <audio controls loop preload="auto">
+        <audio id="bg-music" controls loop preload="auto">
             <source src="sarki.mp3" type="audio/mpeg">
             Tarayıcın MP3 oynatmayı desteklemiyor.
         </audio>
@@ -219,11 +308,40 @@ footer {
 
 </div>
 
-<!-- SAF JAVASCRIPT ÇİÇEK KONFETİ SİSTEMİ -->
 <script>
+let uflemeYapildi = false;
+
+function mumuUfle() {
+    if (uflemeYapildi) return;
+    uflemeYapildi = true;
+
+    // 1. Mumu Söndür (Alevi kaldır, duman efekti ver)
+    const flame = document.getElementById('flame');
+    flame.innerText = '💨';
+    flame.style.animation = 'none';
+
+    // 2. Çiçek & Konfeti Yağmurunu Başlat
+    cicekYagdir();
+
+    // 3. Şarkıyı otomatik başlatmayı dene (Tarayıcı iznine bağlı)
+    const music = document.getElementById('bg-music');
+    if (music) {
+        music.play().catch(() => {
+            // Otomatik oynatma engellenirse sorun yok, kullanıcı tıklayabilir
+        });
+    }
+
+    // 4. Giriş Ekranını Yumuşakça Kaldır
+    setTimeout(() => {
+        const intro = document.getElementById('intro-screen');
+        intro.style.opacity = '0';
+        intro.style.visibility = 'hidden';
+    }, 1200);
+}
+
 function cicekYagdir() {
-    const cicekler = ['🌸', '🌹', '💐', '❤️', '💖', '✨', '🌺'];
-    const toplamTane = 40; // Ekrana dökülecek sembol sayısı
+    const cicekler = ['🌸', '🌹', '💐', '❤️', '💖', '✨', '🌺', '🎉'];
+    const toplamTane = 45;
 
     for (let i = 0; i < toplamTane; i++) {
         setTimeout(() => {
@@ -231,25 +349,20 @@ function cicekYagdir() {
             el.className = 'cicek-tanesi';
             el.innerText = cicekler[Math.floor(Math.random() * cicekler.length)];
             
-            // Rastgele konum, boyut ve hız
             el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            el.style.fontSize = (Math.random() * 22 + 20) + 'px';
             
-            const sure = Math.random() * 2.5 + 2.5; // 2.5 ile 5 saniye arası
+            const sure = Math.random() * 2.5 + 2.5;
             el.style.animationDuration = sure + 's';
 
             document.body.appendChild(el);
 
-            // Düşme tamamlanınca element silinsin
             setTimeout(() => {
                 el.remove();
             }, sure * 1000);
-        }, i * 80); // Aralıklı dökülme
+        }, i * 70);
     }
 }
-
-// Sayfa yüklendiğinde başlat
-window.addEventListener('load', cicekYagdir);
 </script>
 
 </body>
