@@ -20,13 +20,13 @@ body {
     background-color: #0b132b;
     overflow-x: hidden;
 
-    /* Arka Plan Fotoğrafı */
+    /* Arka Plan Fotoğrafın */
     background-image:
         linear-gradient(
             rgba(0, 30, 90, 0.70),
             rgba(10, 15, 50, 0.85)
         ),
-        url("foto.png?v=4");
+        url("foto.png?v=5");
 
     background-size: cover;
     background-position: center;
@@ -34,7 +34,7 @@ body {
     background-attachment: fixed;
 }
 
-/* KEDİ & PASTA GİRİŞ EKRANI (SPLASH SCREEN) */
+/* HAREKETLİ KEDİ GİRİŞ EKRANI */
 #intro-screen {
     position: fixed;
     top: 0;
@@ -53,45 +53,16 @@ body {
     cursor: pointer;
 }
 
-.cat-box {
-    position: relative;
-    user-select: none;
-}
-
-.cat-emoji {
-    font-size: 110px;
-    display: block;
-    animation: kediSallan 2s ease-in-out infinite;
-}
-
-.cake-box {
-    font-size: 90px;
-    position: relative;
-    margin-top: -20px;
-    display: inline-block;
-}
-
-.flame {
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 35px;
-    animation: alevKipirda 0.4s infinite alternate;
-}
-
-@keyframes kediSallan {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(3deg); }
-}
-
-@keyframes alevKipirda {
-    0% { transform: translateX(-50%) scale(1); opacity: 1; }
-    100% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+.cat-gif {
+    width: 220px;
+    height: auto;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
 .intro-text {
-    margin-top: 25px;
+    margin-top: 15px;
     font-size: 22px;
     font-weight: bold;
     color: #ffb3c6;
@@ -100,8 +71,8 @@ body {
 }
 
 @keyframes yaziYanSön {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.98); }
 }
 
 /* ANA SİTE İÇERİĞİ */
@@ -206,7 +177,6 @@ footer {
     text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-/* ÇİÇEK PATLAMA ANİMASYON STİLİ */
 .cicek-tanesi {
     position: fixed;
     top: -50px;
@@ -233,9 +203,7 @@ footer {
     .box, .music-box, .gift-box { padding: 22px; }
     .message { font-size: 17px; }
     .heart { font-size: 55px; }
-    .cat-emoji { font-size: 90px; }
-    .cake-box { font-size: 75px; }
-    .flame { font-size: 28px; top: 3px; }
+    .cat-gif { width: 180px; }
     .intro-text { font-size: 18px; }
 }
 </style>
@@ -243,16 +211,12 @@ footer {
 
 <body>
 
-<!-- GİRİŞ EKRANI (KEDİ & PASTA) -->
+<!-- HAREKETLİ KEDİ & PASTA GİRİŞ EKRANI -->
 <div id="intro-screen" onclick="mumuUfle()">
-    <div class="cat-box">
-        <span class="cat-emoji">🐱</span>
-        <div class="cake-box">
-            <span id="flame" class="flame">🔥</span>
-            🎂
-        </div>
-    </div>
-    <div class="intro-text">
+    <!-- Doğrudan Pastayı Üfleyen Kedi GIF Animasyonu -->
+    <img class="cat-gif" src="https://media.tenor.com/On705C3p1dAAAAAi/cat-birthday.gif" alt="Pasta üfleyen kedi">
+    
+    <div class="intro-text" id="intro-text">
         Muma tıkla ve üfle ❤️
     </div>
 </div>
@@ -315,28 +279,24 @@ function mumuUfle() {
     if (uflemeYapildi) return;
     uflemeYapildi = true;
 
-    // 1. Mumu Söndür (Alevi kaldır, duman efekti ver)
-    const flame = document.getElementById('flame');
-    flame.innerText = '💨';
-    flame.style.animation = 'none';
+    // Yazıyı güncelle
+    document.getElementById('intro-text').innerText = "İyi ki doğdun! 🎉❤️";
 
-    // 2. Çiçek & Konfeti Yağmurunu Başlat
+    // Çiçek & Konfeti Yağmuru
     cicekYagdir();
 
-    // 3. Şarkıyı otomatik başlatmayı dene (Tarayıcı iznine bağlı)
+    // Müzik Başlat
     const music = document.getElementById('bg-music');
     if (music) {
-        music.play().catch(() => {
-            // Otomatik oynatma engellenirse sorun yok, kullanıcı tıklayabilir
-        });
+        music.play().catch(() => {});
     }
 
-    // 4. Giriş Ekranını Yumuşakça Kaldır
+    // 1.5 Saniye sonra giriş ekranını kaldır
     setTimeout(() => {
         const intro = document.getElementById('intro-screen');
         intro.style.opacity = '0';
         intro.style.visibility = 'hidden';
-    }, 1200);
+    }, 1500);
 }
 
 function cicekYagdir() {
