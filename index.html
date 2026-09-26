@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HAYATIMIN AŞKINA ❤️</title>
 
-<!-- Çiçek & Konfeti Kütüphanesi -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <style>
 * {
     margin: 0;
@@ -21,6 +18,7 @@ body {
     color: white;
     text-align: center;
     background-color: #0b132b;
+    overflow-x: hidden;
 
     /* Arka Plan Fotoğrafı */
     background-image:
@@ -28,7 +26,7 @@ body {
             rgba(0, 30, 90, 0.70),
             rgba(10, 15, 50, 0.85)
         ),
-        url("foto.png?v=2");
+        url("foto.png?v=3");
 
     background-size: cover;
     background-position: center;
@@ -41,6 +39,8 @@ body {
     max-width: 900px;
     margin: auto;
     padding: 50px 0;
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
@@ -135,6 +135,26 @@ footer {
     text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
+/* ÇİÇEK PATLAMA ANİMASYON STİLİ */
+.cicek-tanesi {
+    position: fixed;
+    top: -50px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: düsme linear forwards;
+}
+
+@keyframes düsme {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
 @media (max-width: 600px) {
     .container { width: 94%; padding: 30px 0; }
     h1 { font-size: 34px; }
@@ -199,38 +219,37 @@ footer {
 
 </div>
 
-<!-- ÇİÇEK KONFETİ SKRİPTİ -->
+<!-- SAF JAVASCRIPT ÇİÇEK KONFETİ SİSTEMİ -->
 <script>
-function cicekPatlat() {
-    if (typeof confetti === 'function') {
-        var duration = 3.5 * 1000;
-        var end = Date.now() + duration;
+function cicekYagdir() {
+    const cicekler = ['🌸', '🌹', '💐', '❤️', '💖', '✨', '🌺'];
+    const toplamTane = 40; // Ekrana dökülecek sembol sayısı
 
-        (function frame() {
-            confetti({
-                particleCount: 5,
-                angle: 60,
-                spread: 60,
-                origin: { x: 0, y: 0.7 },
-                colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff', '#ffb703']
-            });
-            confetti({
-                particleCount: 5,
-                angle: 120,
-                spread: 60,
-                origin: { x: 1, y: 0.7 },
-                colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff', '#ffb703']
-            });
+    for (let i = 0; i < toplamTane; i++) {
+        setTimeout(() => {
+            const el = document.createElement('div');
+            el.className = 'cicek-tanesi';
+            el.innerText = cicekler[Math.floor(Math.random() * cicekler.length)];
+            
+            // Rastgele konum, boyut ve hız
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            
+            const sure = Math.random() * 2.5 + 2.5; // 2.5 ile 5 saniye arası
+            el.style.animationDuration = sure + 's';
 
-            if (Date.now() < end) {
-                requestAnimationFrame(frame);
-            }
-        })();
+            document.body.appendChild(el);
+
+            // Düşme tamamlanınca element silinsin
+            setTimeout(() => {
+                el.remove();
+            }, sure * 1000);
+        }, i * 80); // Aralıklı dökülme
     }
 }
 
-// Sayfa yüklendiğinde çalıştır
-window.onload = cicekPatlat;
+// Sayfa yüklendiğinde başlat
+window.addEventListener('load', cicekYagdir);
 </script>
 
 </body>
