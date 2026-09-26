@@ -1,152 +1,613 @@
 <!DOCTYPE html>
+
 <html lang="tr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAYATIMIN AŞKINA ❤️</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* Orijinal Lacivert / Mavi Arka Plan */
-            background: linear-gradient(180deg, #0d2137 0%, #162a45 50%, #0d2137 100%);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px 15px;
-        }
+<meta charset="UTF-8">
 
-        .header-title {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-            text-align: center;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .header-subtitle {
-            font-size: 15px;
-            color: #b0c4de;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+<title>HAYATIMIN AŞKINA ❤️</title>
 
-        .container {
-            /* Orijinal Beyaz Yarı Saydam Kart */
-            background-color: rgba(245, 247, 250, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 25px 20px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-            color: #222222;
-        }
 
-        .heart-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
 
-        .main-title {
-            font-size: 16px;
-            font-weight: 800;
-            color: #111111;
-            margin-bottom: 20px;
-            line-height: 1.5;
-            letter-spacing: 0.5px;
-        }
+<style>
 
-        .photo-container {
-            margin: 15px 0 20px 0;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
+* {
 
-        .photo {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: cover;
-            display: block;
-        }
+    margin: 0;
 
-        .message {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #333333;
-            margin: 15px 0;
-            font-weight: 600;
-        }
+    padding: 0;
 
-        .message p {
-            margin-bottom: 12px;
-        }
+    box-sizing: border-box;
 
-        audio {
-            width: 100%;
-            margin-top: 15px;
-            outline: none;
-            border-radius: 30px;
-        }
+}
 
-        @media (max-width: 480px) {
-            .header-title {
-                font-size: 26px;
-            }
-            .container {
-                padding: 20px 15px;
-            }
-            .main-title {
-                font-size: 15px;
-            }
-            .message {
-                font-size: 14px;
-            }
-        }
-    </style>
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    color: white;
+
+    text-align: center;
+
+
+
+    background-image:
+
+        linear-gradient(
+
+            rgba(0, 60, 160, 0.65),
+
+            rgba(10, 20, 100, 0.80)
+
+        ),
+
+        url("EYMENCİMM.png");
+
+
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+}
+
+
+
+.container {
+
+    width: 90%;
+
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 50px 0;
+
+}
+
+
+
+h1 {
+
+    font-size: 48px;
+
+    margin-bottom: 12px;
+
+    text-shadow: 0 4px 15px rgba(0,0,0,0.7);
+
+}
+
+
+
+.subtitle {
+
+    font-size: 20px;
+
+    margin-bottom: 35px;
+
+}
+
+
+
+.box {
+
+    background: rgba(255,255,255,0.15);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+
+
+    border-radius: 30px;
+
+    padding: 35px;
+
+    margin-bottom: 30px;
+
+
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+
+}
+
+
+
+.heart {
+
+    font-size: 70px;
+
+    margin-bottom: 20px;
+
+    animation: kalp 1.5s infinite;
+
+}
+
+
+
+@keyframes kalp {
+
+    0% {
+
+        transform: scale(1);
+
+    }
+
+
+
+    50% {
+
+        transform: scale(1.12);
+
+    }
+
+
+
+    100% {
+
+        transform: scale(1);
+
+    }
+
+}
+
+
+
+.message {
+
+    font-size: 20px;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+
+}
+
+
+
+.photo {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    height: auto;
+
+
+
+    display: block;
+
+    margin: 0 auto;
+
+
+
+    border-radius: 25px;
+
+    border: 4px solid rgba(255,255,255,0.8);
+
+
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+}
+
+
+
+/* MÜZİK */
+
+
+
+.music-box {
+
+    background: rgba(255,255,255,0.15);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    margin-bottom: 30px;
+
+
+
+    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+
+}
+
+
+
+.music-box h2 {
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.music-box p {
+
+    margin-bottom: 20px;
+
+}
+
+
+
+audio {
+
+    width: 100%;
+
+    max-width: 550px;
+
+}
+
+
+
+/* HEDİYELER */
+
+
+
+.gift-box {
+
+    background: rgba(255,255,255,0.15);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    margin-bottom: 30px;
+
+
+
+    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+
+}
+
+
+
+.gift-box h2 {
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.gift {
+
+    display: block;
+
+
+
+    width: 90%;
+
+    max-width: 600px;
+
+
+
+    margin: 15px auto;
+
+    padding: 17px;
+
+
+
+    color: white;
+
+    text-decoration: none;
+
+
+
+    background: rgba(255,255,255,0.2);
+
+
+
+    border: 1px solid rgba(255,255,255,0.35);
+
+    border-radius: 15px;
+
+
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+
+
+    transition: 0.3s;
+
+}
+
+
+
+.gift:hover {
+
+    transform: scale(1.04);
+
+    background: rgba(255,255,255,0.3);
+
+}
+
+
+
+footer {
+
+    margin-top: 30px;
+
+    padding-bottom: 20px;
+
+    font-size: 16px;
+
+}
+
+
+
+/* TELEFON */
+
+
+
+@media (max-width: 600px) {
+
+
+
+    .container {
+
+        width: 94%;
+
+        padding: 30px 0;
+
+    }
+
+
+
+    h1 {
+
+        font-size: 34px;
+
+    }
+
+
+
+    .subtitle {
+
+        font-size: 17px;
+
+    }
+
+
+
+    .box,
+
+    .music-box,
+
+    .gift-box {
+
+        padding: 22px;
+
+    }
+
+
+
+    .message {
+
+        font-size: 17px;
+
+    }
+
+
+
+    .heart {
+
+        font-size: 55px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
+
+
 <body>
 
-    <h1 class="header-title">HAYATIMIN AŞKINA ❤️</h1>
-    <p class="header-subtitle">Bu sayfa sadece sana ait. ❤️</p>
 
-    <div class="container">
-        <div class="heart-icon">❤️</div>
-        
-        <h2 class="main-title">DOĞUM GÜNÜN KUTLU OLSUN BEBEĞİM AŞKIM BİR TANEM</h2>
 
-        <div class="photo-container">
-            <img class="photo" src="https://i.hizliresim.com/x2rgx2th.jpg" alt="Bizim Fotoğrafımız">
-        </div>
+<div class="container">
 
-        <div class="message">
-            <p>İyi ki hayatımdasın. ❤️</p>
-            <p>İyi ki seni tanımışım.</p>
-            <p>Sen benim için çok özelsin.</p>
-            <p>Seni her zaman mutlu görmek istiyorum. ❤️</p>
-            <p>Hayatımı seninle geçirmekten çok mutluyum.</p>
-            <p>2 ayımız doldu ve hâlâ beraberiz, bu beni aşırı mutlu ediyor seni de ediyordur.</p>
-            <p>Sensiz geçen hayatım ve seninle geçen hayatım çok farklı oldu.</p>
-            <p>Bu güzel günde senin doğum gününde senin için yaptım bu siteyi. Ucuz olabilir ama emeğim çok, sana bu emek değer de artar bile &lt;3</p>
-        </div>
 
-        <audio controls autoplay loop>
-            <source src="sarki.mp3" type="audio/mpeg">
-            Tarayıcınız ses öğesini desteklemiyor.
-        </audio>
+
+    <h1>HAYATIMIN AŞKINA ❤️</h1>
+
+
+
+    <div class="subtitle">
+
+        Bu sayfa sadece sana ait. ❤️
+
     </div>
 
+
+
+
+
+    <!-- ANA MESAJ -->
+
+
+
+    <div class="box">
+
+
+
+        <div class="heart">❤️</div>
+
+
+
+        <div class="message">
+
+            DOĞUM GÜNÜN KUTLU OLSUN BEBEİM AŞKIM BİR TANENEM
+
+            İyi ki hayatımdasın. ❤️<br>
+
+            İyi ki seni tanımışım.<br>
+
+            Sen benim için çok özelsin.<br>
+
+            Seni her zaman mutlu görmek istiyorum. ❤️
+
+            Hayatımı senin ile geçirmekden çok mutluyum
+
+            2 ayımız doldu ve halanda beraber bu beni aşırı mutlu ediyo seni de ediyodur 
+
+            sensiz geçen hayatım ve senle geçen hayatım çok farklı oldu 
+
+            Bu güzel günde senin doğum gününde senin için yaptım bu site ucuz olabilir ama emeğim çok sana bu emek değer de artar<3
+
+        </div>
+
+
+
+        <img
+
+            class="photo"
+
+            src="<img src=<img src="foto.jpg" alt="Bizim fotoğrafımız">
+
+        >
+
+
+
+    </div>
+
+
+
+
+
+    <!-- ŞARKI -->
+
+
+
+    <div class="music-box">
+
+
+
+        <h2>🎵 Bizim Şarkımız</h2>
+
+
+
+        <p>❤️ Bu şarkı sana...</p>
+
+
+
+        <audio controls>
+
+            <source src=<audio src="sarki.mp3" controls></audio>
+
+            Tarayıcın MP3 oynatmayı desteklemiyor.
+
+        </audio>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- HEDİYELER -->
+
+
+
+    <div class="gift-box">
+
+
+
+        <h2>🎁 Sana Almak İstediklerim</h2>
+
+
+
+        <a
+
+            class="gift"
+
+            href="https://www.trendyol.com/buketim-seninle/13-lu-lacivert-simli-saten-gul-buketi-solmayan-cicek-arkadasa-anneye-hediyelik-buket-p-1063082448"
+
+            target="_blank"
+
+        >
+
+            💐 Sana almak istediğim ilk hediye
+
+        </a>
+
+
+
+        <a
+
+            class="gift"
+
+            href="https://www.trendyol.com/pink-shake/sevgiliye-arkadasa-hediye-kutusu-gullu-kolyeli-kar-kuresi-dogum-gunu-p-774599660?boutiqueId=61"
+
+            target="_blank"
+
+        >
+
+            🎁 Bunu da çok beğendim
+
+        </a>
+
+
+
+    </div>
+
+
+
+
+
+    <footer>
+
+        Senin için hazırlandı. ❤️
+
+    </footer>
+
+
+
+</div>
+
+
+
 </body>
+
 </html>
