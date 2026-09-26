@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HAYATIMIN AŞKINA ❤️</title>
 
+<!-- Konfeti ve Çiçek Efekti İçin Kütüphane -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <style>
 * {
     margin: 0;
@@ -19,7 +22,7 @@ body {
     text-align: center;
     background-color: #0b132b;
 
-    /* Fotoğrafı doğrudan tüm sayfanın arka planı olarak ayarladık */
+    /* Fotoğraf Arka Planı */
     background-image:
         linear-gradient(
             rgba(0, 30, 90, 0.70),
@@ -195,6 +198,37 @@ footer {
     </footer>
 
 </div>
+
+<!-- ÇİÇEK KONFETİ SKRİPTİ -->
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    // Sayfa açıldığında çiçek ve konfeti patlatma efekti
+    var duration = 3 * 1000; // 3 saniye sürecek
+    var end = Date.now() + duration;
+
+    (function frame() {
+        // Çiçek ve kalp renkleri (Pembe, Kırmızı, Beyaz, Altın)
+        confetti({
+            particleCount: 4,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff', '#ffb703']
+        });
+        confetti({
+            particleCount: 4,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff', '#ffb703']
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    })();
+});
+</script>
 
 </body>
 </html>
