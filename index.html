@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HAYATIMIN AŞKINA ❤️</title>
 
-<!-- Konfeti ve Çiçek Efekti İçin Kütüphane -->
+<!-- Çiçek & Konfeti Kütüphanesi -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
@@ -22,13 +22,13 @@ body {
     text-align: center;
     background-color: #0b132b;
 
-    /* Fotoğraf Arka Planı */
+    /* Arka Plan Fotoğrafı */
     background-image:
         linear-gradient(
             rgba(0, 30, 90, 0.70),
             rgba(10, 15, 50, 0.85)
         ),
-        url("foto.png?v=1");
+        url("foto.png?v=2");
 
     background-size: cover;
     background-position: center;
@@ -201,33 +201,36 @@ footer {
 
 <!-- ÇİÇEK KONFETİ SKRİPTİ -->
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-    // Sayfa açıldığında çiçek ve konfeti patlatma efekti
-    var duration = 3 * 1000; // 3 saniye sürecek
-    var end = Date.now() + duration;
+function cicekPatlat() {
+    if (typeof confetti === 'function') {
+        var duration = 3.5 * 1000;
+        var end = Date.now() + duration;
 
-    (function frame() {
-        // Çiçek ve kalp renkleri (Pembe, Kırmızı, Beyaz, Altın)
-        confetti({
-            particleCount: 4,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff', '#ffb703']
-        });
-        confetti({
-            particleCount: 4,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff', '#ffb703']
-        });
+        (function frame() {
+            confetti({
+                particleCount: 5,
+                angle: 60,
+                spread: 60,
+                origin: { x: 0, y: 0.7 },
+                colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff', '#ffb703']
+            });
+            confetti({
+                particleCount: 5,
+                angle: 120,
+                spread: 60,
+                origin: { x: 1, y: 0.7 },
+                colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff', '#ffb703']
+            });
 
-        if (Date.now() < end) {
-            requestAnimationFrame(frame);
-        }
-    })();
-});
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        })();
+    }
+}
+
+// Sayfa yüklendiğinde çalıştır
+window.onload = cicekPatlat;
 </script>
 
 </body>
