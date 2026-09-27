@@ -26,7 +26,7 @@ body {
             rgba(0, 30, 90, 0.70),
             rgba(10, 15, 50, 0.85)
         ),
-        url("foto.png?v=5");
+        url("foto.png?v=6");
 
     background-size: cover;
     background-position: center;
@@ -34,52 +34,55 @@ body {
     background-attachment: fixed;
 }
 
-/* HAREKETLİ KEDİ & PASTA GİRİŞ EKRANI */
+/* KEDİ & PASTA GİRİŞ EKRANI */
 #intro-screen {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: rgba(10, 15, 40, 0.96);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    z-index: 99999;
+    z-index: 999999;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: opacity 1s ease, visibility 1s ease;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
     cursor: pointer;
     user-select: none;
 }
 
-.cat-cake-box {
-    position: relative;
+.intro-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .cat-emoji {
-    font-size: 110px;
+    font-size: 100px;
     line-height: 1;
+    margin-bottom: -20px;
+    position: relative;
+    z-index: 2;
     animation: kediSallan 2s ease-in-out infinite;
 }
 
 .cake-wrapper {
     position: relative;
-    margin-top: -30px;
-    font-size: 85px;
+    font-size: 80px;
     line-height: 1;
+    z-index: 1;
 }
 
 .flame {
     position: absolute;
-    top: -15px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 32px;
+    font-size: 30px;
     animation: alevKipirda 0.4s infinite alternate;
 }
 
@@ -94,7 +97,7 @@ body {
 }
 
 .intro-text {
-    margin-top: 25px;
+    margin-top: 30px;
     font-size: 22px;
     font-weight: bold;
     color: #ffb3c6;
@@ -212,7 +215,7 @@ footer {
 .cicek-tanesi {
     position: fixed;
     top: -50px;
-    z-index: 9999;
+    z-index: 9999999;
     pointer-events: none;
     animation: düsme linear forwards;
 }
@@ -229,4 +232,151 @@ footer {
 }
 
 @media (max-width: 600px) {
-    .container { width: 94%; padding: 30px
+    .container { width: 94%; padding: 30px 0; }
+    h1 { font-size: 34px; }
+    .subtitle { font-size: 17px; }
+    .box, .music-box, .gift-box { padding: 22px; }
+    .message { font-size: 17px; }
+    .heart { font-size: 55px; }
+    .cat-emoji { font-size: 85px; }
+    .cake-wrapper { font-size: 65px; }
+    .flame { font-size: 24px; top: -15px; }
+    .intro-text { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- GİRİŞ EKRANI -->
+<div id="intro-screen" onclick="mumuUfle()">
+    <div class="intro-content">
+        <div class="cat-emoji">🐱</div>
+        <div class="cake-wrapper">
+            <span id="flame" class="flame">🔥</span>
+            🎂
+        </div>
+        <div class="intro-text" id="intro-text">
+            Muma tıkla ve üfle ❤️
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <h1>HAYATIMIN AŞKINA ❤️</h1>
+
+    <div class="subtitle">
+        Bu sayfa sadece sana ait. ❤️
+    </div>
+
+    <!-- ANA MESAJ -->
+    <div class="box">
+        <div class="heart">❤️</div>
+        <div class="message">
+            DOĞUM GÜNÜN KUTLU OLSUN BEBEĞİM AŞKIM BİR TANEM<br><br>
+            İyi ki hayatımdasın. ❤️<br>
+            İyi ki seni tanımışım.<br>
+            Sen benim için çok özelsin.<br>
+            Seni her zaman mutlu görmek istiyorum. ❤️<br>
+            Hayatımı seninle geçirmekten çok mutluyum.<br>
+            2 ayımız doldu ve hâlâ beraberiz, bu beni aşırı mutlu ediyor seni de ediyordur.<br>
+            Sensiz geçen hayatım ve seninle geçen hayatım çok farklı oldu.<br>
+            Bu güzel günde senin doğum gününde senin için yaptım bu siteyi. Ucuz olabilir ama emeğim çok, sana bu emek değer de artar bile &lt;3
+        </div>
+    </div>
+
+    <!-- ŞARKI -->
+    <div class="music-box">
+        <h2>🎵 Bizim Şarkımız</h2>
+        <p>❤️ Bu şarkı sana...</p>
+        <audio id="bg-music" controls loop preload="auto">
+            <source src="sarkı.m4a" type="audio/mp4">
+            Tarayıcın ses oynatmayı desteklemiyor.
+        </audio>
+    </div>
+
+    <!-- HEDİYELER -->
+    <div class="gift-box">
+        <h2>🎁 Sana Almak İstediklerim</h2>
+        <a class="gift" href="https://www.trendyol.com/buketim-seninle/13-lu-lacivert-simli-saten-gul-buketi-solmayan-cicek-arkadasa-anneye-hediyelik-buket-p-1063082448" target="_blank">
+            💐 Sana almak istediğim ilk hediye
+        </a>
+        <a class="gift" href="https://www.trendyol.com/pink-shake/sevgiliye-arkadasa-hediye-kutusu-gullu-kolyeli-kar-kuresi-dogum-gunu-p-774599660?boutiqueId=61" target="_blank">
+            🎁 Bunu da çok beğendim
+        </a>
+    </div>
+
+    <footer>
+        Senin için hazırlandı. ❤️
+    </footer>
+
+</div>
+
+<script>
+let uflemeYapildi = false;
+
+function mumuUfle() {
+    if (uflemeYapildi) return;
+    uflemeYapildi = true;
+
+    // 1. Mumu söndür
+    const flame = document.getElementById('flame');
+    if (flame) {
+        flame.innerText = '💨';
+        flame.style.animation = 'none';
+    }
+
+    // 2. Yazıyı güncelle
+    const introText = document.getElementById('intro-text');
+    if (introText) {
+        introText.innerText = "İyi ki doğdun! 🎉❤️";
+    }
+
+    // 3. Konfeti ve Çiçek Yağmuru
+    cicekYagdir();
+
+    // 4. Şarkıyı başlat
+    const music = document.getElementById('bg-music');
+    if (music) {
+        music.play().catch(() => {});
+    }
+
+    // 5. Giriş ekranını kaldır
+    setTimeout(() => {
+        const intro = document.getElementById('intro-screen');
+        if (intro) {
+            intro.style.opacity = '0';
+            intro.style.visibility = 'hidden';
+        }
+    }, 1200);
+}
+
+function cicekYagdir() {
+    const cicekler = ['🌸', '🌹', '💐', '❤️', '💖', '✨', '🌺', '🎉'];
+    const toplamTane = 45;
+
+    for (let i = 0; i < toplamTane; i++) {
+        setTimeout(() => {
+            const el = document.createElement('div');
+            el.className = 'cicek-tanesi';
+            el.innerText = cicekler[Math.floor(Math.random() * cicekler.length)];
+            
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 22 + 20) + 'px';
+            
+            const sure = Math.random() * 2.5 + 2.5;
+            el.style.animationDuration = sure + 's';
+
+            document.body.appendChild(el);
+
+            setTimeout(() => {
+                el.remove();
+            }, sure * 1000);
+        }, i * 70);
+    }
+}
+</script>
+
+</body>
+</html>
