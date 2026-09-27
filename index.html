@@ -26,7 +26,7 @@ body {
             rgba(0, 30, 90, 0.70),
             rgba(10, 15, 50, 0.85)
         ),
-        url("foto.png?v=7");
+        url("foto.png?v=8");
 
     background-size: cover;
     background-position: center;
@@ -34,79 +34,106 @@ body {
     background-attachment: fixed;
 }
 
-/* GİRİŞ KAPLAMASI */
-#intro-overlay {
+/* ŞEFFAF ÖN KEDİ İNTACTIVE KATMANI */
+#cat-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 15, 40, 0.95);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 15, 35, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 999999;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
+    transition: opacity 1s ease, visibility 1s ease;
+    cursor: pointer;
+    user-select: none;
 }
 
-.intro-card {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 40px 25px;
-    border-radius: 25px;
-    width: 88%;
-    max-width: 400px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+/* KEDİ VE PASTA ANİMASYON ALANI */
+.cat-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.cat-icon {
-    font-size: 80px;
+.cat-character {
+    font-size: 110px;
     line-height: 1;
-    margin-bottom: 5px;
+    z-index: 2;
+    transition: transform 0.5s ease-in-out;
 }
 
-.cake-icon {
+/* Üfleme anındaki eğilme hareketi */
+.cat-character.blowing {
+    animation: kediUfle 0.8s ease-in-out forwards;
+}
+
+@keyframes kediUfle {
+    0% { transform: scale(1) translateY(0) rotate(0deg); }
+    50% { transform: scale(1.1) translateY(20px) rotate(-8deg); } /* Pastaya doğru eğilip üfler */
+    100% { transform: scale(1) translateY(0) rotate(0deg); }
+}
+
+/* ÜFLEME NEFES/DUMAN EFEKTİ */
+.wind-effect {
+    position: absolute;
+    top: 65px;
+    font-size: 35px;
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.wind-effect.active {
+    animation: nefesUfle 0.6s ease-out forwards;
+}
+
+@keyframes nefesUfle {
+    0% { opacity: 0; transform: translateY(-10px) scale(0.5); }
+    50% { opacity: 1; transform: translateY(15px) scale(1.3); }
+    100% { opacity: 0; transform: translateY(30px) scale(1.8); }
+}
+
+.cake-box {
     position: relative;
-    font-size: 65px;
+    font-size: 85px;
     line-height: 1;
-    margin-bottom: 25px;
+    margin-top: -15px;
+    z-index: 1;
 }
 
-.flame-icon {
+.flame-light {
     position: absolute;
     top: -18px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 26px;
+    font-size: 30px;
     animation: alevKipirda 0.4s infinite alternate;
 }
 
 @keyframes alevKipirda {
     0% { transform: translateX(-50%) scale(1); opacity: 1; }
-    100% { transform: translateX(-50%) scale(1.25); opacity: 0.8; }
+    100% { transform: translateX(-50%) scale(1.25); opacity: 0.85; }
 }
 
-.blow-btn {
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
+.overlay-hint {
+    margin-top: 30px;
+    font-size: 22px;
     font-weight: bold;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(255, 117, 140, 0.4);
-    transition: transform 0.2s, background 0.3s;
-    outline: none;
+    color: #ffb3c6;
+    text-shadow: 0 0 12px rgba(255, 179, 198, 0.7);
+    animation: yaziSallan 1.5s infinite;
 }
 
-.blow-btn:active {
-    transform: scale(0.95);
+@keyframes yaziSallan {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.96); opacity: 0.7; }
 }
 
 /* ANA SİTE İÇERİĞİ */
@@ -237,24 +264,32 @@ footer {
     .box, .music-box, .gift-box { padding: 22px; }
     .message { font-size: 17px; }
     .heart { font-size: 55px; }
+    .cat-character { font-size: 90px; }
+    .cake-box { font-size: 70px; }
+    .flame-light { font-size: 24px; top: -15px; }
+    .overlay-hint { font-size: 18px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- GİRİŞ KAPLAMASI -->
-<div id="intro-overlay">
-    <div class="intro-card">
-        <div class="cat-icon">🐱</div>
-        <div class="cake-icon">
-            <span id="flame" class="flame-icon">🔥</span>
+<!-- ÖN TARAFTAKİ KEDİ & PASTA ÜFLEME KATMANI -->
+<div id="cat-overlay" onclick="mumuUfleAnimasyon()">
+    <div class="cat-container">
+        <div id="cat" class="cat-character">🐱</div>
+        <div id="wind" class="wind-effect">💨</div>
+        <div class="cake-box">
+            <span id="flame" class="flame-light">🔥</span>
             🎂
         </div>
-        <button id="blow-btn" class="blow-btn" onclick="mumuUfle()">🕯️ Muma Dokun ve Üfle</button>
+    </div>
+    <div class="overlay-hint" id="overlay-text">
+        Dokun ve Mumu Üfle ❤️
     </div>
 </div>
 
+<!-- ARKADAKİ HAZIR HAZIR DURA KULLANICI ARAYÜZÜ -->
 <div class="container">
 
     <h1>HAYATIMIN AŞKINA ❤️</h1>
@@ -309,41 +344,42 @@ footer {
 <script>
 let uflemeYapildi = false;
 
-function mumuUfle() {
+function mumuUfleAnimasyon() {
     if (uflemeYapildi) return;
     uflemeYapildi = true;
 
-    // 1. Alevi duman yap
+    const cat = document.getElementById('cat');
+    const wind = document.getElementById('wind');
     const flame = document.getElementById('flame');
-    if (flame) {
-        flame.innerText = '💨';
-        flame.style.animation = 'none';
-    }
+    const text = document.getElementById('overlay-text');
 
-    // 2. Buton yazısını değiştir
-    const btn = document.getElementById('blow-btn');
-    if (btn) {
-        btn.innerText = "İyi ki doğdun! 🎉❤️";
-        btn.style.background = "linear-gradient(135deg, #42e695, #3bb2b8)";
-    }
+    // 1. Kedi pastaya doğru eğilme animasyonunu başlatır
+    cat.classList.add('blowing');
 
-    // 3. Çiçek/Konfeti Yağdır
+    // 2. Üfleme nefesi (duman) çıkar ve mumu söndürür
+    setTimeout(() => {
+        wind.classList.add('active');
+        if (flame) flame.style.display = 'none'; // Alev söner
+        if (text) text.innerText = "İyi ki doğdun! 🎉❤️";
+    }, 300);
+
+    // 3. Konfetiler ve çiçekler yağar
     cicekYagdir();
 
-    // 4. Şarkıyı Başlat
+    // 4. Şarkıyı başlat
     const music = document.getElementById('bg-music');
     if (music) {
         music.play().catch(() => {});
     }
 
-    // 5. Ekranı kaldır
+    // 5. Üfleme bittikten sonra şeffaf ön katman yumuşakça yok olur
     setTimeout(() => {
-        const overlay = document.getElementById('intro-overlay');
+        const overlay = document.getElementById('cat-overlay');
         if (overlay) {
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
         }
-    }, 1200);
+    }, 1400);
 }
 
 function cicekYagdir() {
