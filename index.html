@@ -26,7 +26,7 @@ body {
             rgba(0, 30, 90, 0.70),
             rgba(10, 15, 50, 0.85)
         ),
-        url("foto.png?v=6");
+        url("foto.png?v=7");
 
     background-size: cover;
     background-position: center;
@@ -34,80 +34,79 @@ body {
     background-attachment: fixed;
 }
 
-/* KEDİ & PASTA GİRİŞ EKRANI */
-#intro-screen {
+/* GİRİŞ KAPLAMASI */
+#intro-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 15, 40, 0.96);
+    background: rgba(10, 15, 40, 0.95);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     z-index: 999999;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: opacity 0.8s ease, visibility 0.8s ease;
-    cursor: pointer;
-    user-select: none;
 }
 
-.intro-content {
+.intro-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 40px 25px;
+    border-radius: 25px;
+    width: 88%;
+    max-width: 400px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-.cat-emoji {
-    font-size: 100px;
-    line-height: 1;
-    margin-bottom: -20px;
-    position: relative;
-    z-index: 2;
-    animation: kediSallan 2s ease-in-out infinite;
-}
-
-.cake-wrapper {
-    position: relative;
+.cat-icon {
     font-size: 80px;
     line-height: 1;
-    z-index: 1;
+    margin-bottom: 5px;
 }
 
-.flame {
+.cake-icon {
+    position: relative;
+    font-size: 65px;
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.flame-icon {
     position: absolute;
-    top: -20px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 30px;
+    font-size: 26px;
     animation: alevKipirda 0.4s infinite alternate;
-}
-
-@keyframes kediSallan {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-6px) rotate(2deg); }
 }
 
 @keyframes alevKipirda {
     0% { transform: translateX(-50%) scale(1); opacity: 1; }
-    100% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+    100% { transform: translateX(-50%) scale(1.25); opacity: 0.8; }
 }
 
-.intro-text {
-    margin-top: 30px;
-    font-size: 22px;
+.blow-btn {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
     font-weight: bold;
-    color: #ffb3c6;
-    text-shadow: 0 0 12px rgba(255, 179, 198, 0.6);
-    animation: yaziYanSön 1.5s infinite;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 117, 140, 0.4);
+    transition: transform 0.2s, background 0.3s;
+    outline: none;
 }
 
-@keyframes yaziYanSön {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.98); }
+.blow-btn:active {
+    transform: scale(0.95);
 }
 
 /* ANA SİTE İÇERİĞİ */
@@ -238,27 +237,21 @@ footer {
     .box, .music-box, .gift-box { padding: 22px; }
     .message { font-size: 17px; }
     .heart { font-size: 55px; }
-    .cat-emoji { font-size: 85px; }
-    .cake-wrapper { font-size: 65px; }
-    .flame { font-size: 24px; top: -15px; }
-    .intro-text { font-size: 18px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- GİRİŞ EKRANI -->
-<div id="intro-screen" onclick="mumuUfle()">
-    <div class="intro-content">
-        <div class="cat-emoji">🐱</div>
-        <div class="cake-wrapper">
-            <span id="flame" class="flame">🔥</span>
+<!-- GİRİŞ KAPLAMASI -->
+<div id="intro-overlay">
+    <div class="intro-card">
+        <div class="cat-icon">🐱</div>
+        <div class="cake-icon">
+            <span id="flame" class="flame-icon">🔥</span>
             🎂
         </div>
-        <div class="intro-text" id="intro-text">
-            Muma tıkla ve üfle ❤️
-        </div>
+        <button id="blow-btn" class="blow-btn" onclick="mumuUfle()">🕯️ Muma Dokun ve Üfle</button>
     </div>
 </div>
 
@@ -320,34 +313,35 @@ function mumuUfle() {
     if (uflemeYapildi) return;
     uflemeYapildi = true;
 
-    // 1. Mumu söndür
+    // 1. Alevi duman yap
     const flame = document.getElementById('flame');
     if (flame) {
         flame.innerText = '💨';
         flame.style.animation = 'none';
     }
 
-    // 2. Yazıyı güncelle
-    const introText = document.getElementById('intro-text');
-    if (introText) {
-        introText.innerText = "İyi ki doğdun! 🎉❤️";
+    // 2. Buton yazısını değiştir
+    const btn = document.getElementById('blow-btn');
+    if (btn) {
+        btn.innerText = "İyi ki doğdun! 🎉❤️";
+        btn.style.background = "linear-gradient(135deg, #42e695, #3bb2b8)";
     }
 
-    // 3. Konfeti ve Çiçek Yağmuru
+    // 3. Çiçek/Konfeti Yağdır
     cicekYagdir();
 
-    // 4. Şarkıyı başlat
+    // 4. Şarkıyı Başlat
     const music = document.getElementById('bg-music');
     if (music) {
         music.play().catch(() => {});
     }
 
-    // 5. Giriş ekranını kaldır
+    // 5. Ekranı kaldır
     setTimeout(() => {
-        const intro = document.getElementById('intro-screen');
-        if (intro) {
-            intro.style.opacity = '0';
-            intro.style.visibility = 'hidden';
+        const overlay = document.getElementById('intro-overlay');
+        if (overlay) {
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
         }
     }, 1200);
 }
