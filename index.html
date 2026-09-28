@@ -26,53 +26,12 @@ body {
             rgba(0, 30, 90, 0.70),
             rgba(10, 15, 50, 0.85)
         ),
-        url("foto.png?v=5");
+        url("foto.png?v=9");
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
-
-/* HAREKETLİ KEDİ GİRİŞ EKRANI */
-#intro-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(10, 15, 40, 0.95);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 1s ease, visibility 1s ease;
-    cursor: pointer;
-}
-
-.cat-gif {
-    width: 220px;
-    height: auto;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-
-.intro-text {
-    margin-top: 15px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #ffb3c6;
-    text-shadow: 0 0 12px rgba(255, 179, 198, 0.6);
-    animation: yaziYanSön 1.5s infinite;
-}
-
-@keyframes yaziYanSön {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.98); }
 }
 
 /* ANA SİTE İÇERİĞİ */
@@ -125,6 +84,10 @@ h1 {
     line-height: 1.8;
 }
 
+.message p {
+    margin-top: 15px;
+}
+
 .music-box, .gift-box {
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.3);
@@ -142,6 +105,9 @@ h1 {
 
 .music-box p {
     margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffb3c6;
 }
 
 audio {
@@ -180,7 +146,7 @@ footer {
 .cicek-tanesi {
     position: fixed;
     top: -50px;
-    z-index: 9999;
+    z-index: 9999999;
     pointer-events: none;
     animation: düsme linear forwards;
 }
@@ -203,23 +169,11 @@ footer {
     .box, .music-box, .gift-box { padding: 22px; }
     .message { font-size: 17px; }
     .heart { font-size: 55px; }
-    .cat-gif { width: 180px; }
-    .intro-text { font-size: 18px; }
 }
 </style>
 </head>
 
 <body>
-
-<!-- HAREKETLİ KEDİ & PASTA GİRİŞ EKRANI -->
-<div id="intro-screen" onclick="mumuUfle()">
-    <!-- Doğrudan Pastayı Üfleyen Kedi GIF Animasyonu -->
-    <img class="cat-gif" src="https://media.tenor.com/On705C3p1dAAAAAi/cat-birthday.gif" alt="Pasta üfleyen kedi">
-    
-    <div class="intro-text" id="intro-text">
-        Muma tıkla ve üfle ❤️
-    </div>
-</div>
 
 <div class="container">
 
@@ -242,20 +196,22 @@ footer {
             2 ayımız doldu ve hâlâ beraberiz, bu beni aşırı mutlu ediyor seni de ediyordur.<br>
             Sensiz geçen hayatım ve seninle geçen hayatım çok farklı oldu.<br>
             Bu güzel günde senin doğum gününde senin için yaptım bu siteyi. Ucuz olabilir ama emeğim çok, sana bu emek değer de artar bile &lt;3
-            <p>Seninle hayatımın sonuna kadar yaşamakdan onur ve gurur duyarım</p>
+            
+            <p>Seninle hayatımın sonuna kadar yaşamaktan onur ve gurur duyarım</p>
+            <p>Bu zamanda böyle bir çift olmamız benim için çok güzel seninle güzel bir gelecek kurmak istiyorum ve senden tek istediğim şeyleri doğru ile karşılı vermen ve güvenimi kazanman lazım ben güveniyorum sana ama bazenleri o güvensizlik kırılıyo bana sonsuz bir söz vermeni çok istiyorum</p>
+            <p>senden bana karşılıklı davranmanı istiyorum evet seviyorum seni çok hatta hiç olmadı kadar ailemden en son kimi böyle sevdimi biliyorsun seninle sonsuz olmak istiyorum DOĞUM GÜNÜN KUTLU OLSUN &lt;3</p>
         </div>
     </div>
 
-    <!-- ŞARKI -->
-   <!-- ŞARKI -->
-<div class="music-box">
-    <h2>🎵 Bizim Şarkımız</h2>
-    <p>❤️ Bu şarkı sana...</p>
-    <audio id="bg-music" controls loop preload="auto">
-        <source src="sarkı.m4a" type="audio/mp4">
-        Tarayıcın ses oynatmayı desteklemiyor.
-    </audio>
-</div>
+    <!-- ŞARKI BÖLÜMÜ -->
+    <div class="music-box">
+        <h2>🎵 Bizim Şarkılarımız</h2>
+        <p id="song-title">❤️ 1. Şarkı Çalıyor...</p>
+        <audio id="bg-music" controls preload="auto">
+            <source id="audio-source" src="sarkı.m4a" type="audio/mp4">
+            Tarayıcın ses oynatmayı desteklemiyor.
+        </audio>
+    </div>
 
     <!-- HEDİYELER -->
     <div class="gift-box">
@@ -275,35 +231,14 @@ footer {
 </div>
 
 <script>
-let uflemeYapildi = false;
-
-function mumuUfle() {
-    if (uflemeYapildi) return;
-    uflemeYapildi = true;
-
-    // Yazıyı güncelle
-    document.getElementById('intro-text').innerText = "İyi ki doğdun! 🎉❤️";
-
-    // Çiçek & Konfeti Yağmuru
+// Arka planda uçuşan konfetiler/çiçekler
+window.onload = function() {
     cicekYagdir();
-
-    // Müzik Başlat
-    const music = document.getElementById('bg-music');
-    if (music) {
-        music.play().catch(() => {});
-    }
-
-    // 1.5 Saniye sonra giriş ekranını kaldır
-    setTimeout(() => {
-        const intro = document.getElementById('intro-screen');
-        intro.style.opacity = '0';
-        intro.style.visibility = 'hidden';
-    }, 1500);
-}
+};
 
 function cicekYagdir() {
     const cicekler = ['🌸', '🌹', '💐', '❤️', '💖', '✨', '🌺', '🎉'];
-    const toplamTane = 45;
+    const toplamTane = 40;
 
     for (let i = 0; i < toplamTane; i++) {
         setTimeout(() => {
@@ -314,7 +249,7 @@ function cicekYagdir() {
             el.style.left = Math.random() * 100 + 'vw';
             el.style.fontSize = (Math.random() * 22 + 20) + 'px';
             
-            const sure = Math.random() * 2.5 + 2.5;
+            const sure = Math.random() * 3 + 3;
             el.style.animationDuration = sure + 's';
 
             document.body.appendChild(el);
@@ -322,8 +257,40 @@ function cicekYagdir() {
             setTimeout(() => {
                 el.remove();
             }, sure * 1000);
-        }, i * 70);
+        }, i * 100);
     }
+}
+
+// İKİ ŞARKIYI SIRAYLA OYNATAN SİSTEM
+const playlist = [
+    { src: 'sarkı.m4a', title: '❤️ 1. Şarkı Çalıyor...' },
+    { src: 'cümlelerim.mp3.m4a', title: '❤️ 2. Şarkı Çalıyor...' }
+];
+
+let currentSongIndex = 0;
+const music = document.getElementById('bg-music');
+const audioSource = document.getElementById('audio-source');
+const songTitle = document.getElementById('song-title');
+
+if (music) {
+    music.addEventListener('ended', function() {
+        currentSongIndex++;
+        
+        if (currentSongIndex < playlist.length) {
+            audioSource.src = playlist[currentSongIndex].src;
+            if (songTitle) songTitle.innerText = playlist[currentSongIndex].title;
+            
+            music.load();
+            music.play();
+        } else {
+            // Şarkılar bitince tekrar başa döner
+            currentSongIndex = 0;
+            audioSource.src = playlist[0].src;
+            if (songTitle) songTitle.innerText = playlist[0].title;
+            music.load();
+            music.play();
+        }
+    });
 }
 </script>
 
