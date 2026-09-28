@@ -34,14 +34,14 @@ body {
     background-attachment: fixed;
 }
 
-/* ŞEFFAF ÖN KEDİ İNTERAKTİF KATMANI */
+/* ÖN TARAFTAKİ KEDİ & PASTA ÜFLEME KATMANI */
 #cat-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(10, 15, 35, 0.92);
+    background: rgba(10, 15, 35, 0.93);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 999999;
@@ -54,7 +54,6 @@ body {
     user-select: none;
 }
 
-/* KEDİ VE PASTA ANİMASYON ALANI */
 .cat-container {
     position: relative;
     display: flex;
@@ -69,7 +68,6 @@ body {
     transition: transform 0.5s ease-in-out;
 }
 
-/* Üfleme anındaki eğilme hareketi */
 .cat-character.blowing {
     animation: kediUfle 0.8s ease-in-out forwards;
 }
@@ -80,7 +78,6 @@ body {
     100% { transform: scale(1) translateY(0) rotate(0deg); }
 }
 
-/* ÜFLEME NEFES/DUMAN EFEKTİ */
 .wind-effect {
     position: absolute;
     top: 65px;
@@ -296,7 +293,7 @@ footer {
     </div>
 </div>
 
-<!-- ARKADAKİ HAZIR DURA KULLANICI ARAYÜZÜ -->
+<!-- ANA SİTE İÇERİĞİ -->
 <div class="container">
 
     <h1>HAYATIMIN AŞKINA ❤️</h1>
@@ -327,10 +324,10 @@ footer {
 
     <!-- ŞARKI BÖLÜMÜ -->
     <div class="music-box">
-        <h2>🎵 Bizim Şarkılarımız</h2>
-        <p id="song-title">❤️ 1. Şarkı Çalıyor...</p>
-        <audio id="bg-music" controls preload="auto">
-            <source id="audio-source" src="sarkı.m4a" type="audio/mp4">
+        <h2>🎵 Bizim Şarkımız</h2>
+        <p>❤️ Bu şarkı sana...</p>
+        <audio id="bg-music" controls loop preload="auto">
+            <source src="sarkı.m4a" type="audio/mp4">
             Tarayıcın ses oynatmayı desteklemiyor.
         </audio>
     </div>
@@ -364,26 +361,26 @@ function mumuUfleAnimasyon() {
     const flame = document.getElementById('flame');
     const text = document.getElementById('overlay-text');
 
-    // 1. Kedi muma eğilip üfler
+    // Kedi muma üfler
     cat.classList.add('blowing');
 
-    // 2. Duman çıkar, alev söner
+    // Nefes çıkar, alev söner
     setTimeout(() => {
         wind.classList.add('active');
         if (flame) flame.style.display = 'none';
         if (text) text.innerText = "İyi ki doğdun! 🎉❤️";
     }, 300);
 
-    // 3. Konfeti/Çiçek yağmuru başlar
+    // Çiçek/kalp yağmuru başlar
     cicekYagdir();
 
-    // 4. Şarkı otomatik başlar
+    // Şarkı başlar
     const music = document.getElementById('bg-music');
     if (music) {
         music.play().catch(() => {});
     }
 
-    // 5. Ön kedi ekranı saydamlaşıp kaybolur
+    // Kedi ekranı kalkar
     setTimeout(() => {
         const overlay = document.getElementById('cat-overlay');
         if (overlay) {
@@ -416,37 +413,6 @@ function cicekYagdir() {
             }, sure * 1000);
         }, i * 70);
     }
-}
-
-// İKİ ŞARKIYI SIRAYLA ÇALMA SİSTEMİ
-const playlist = [
-    { src: 'sarkı.m4a', title: '❤️ 1. Şarkı Çalıyor...' },
-    { src: 'cümlelerim.mp3.m4a', title: '❤️ 2. Şarkı Çalıyor...' }
-];
-
-let currentSongIndex = 0;
-const music = document.getElementById('bg-music');
-const audioSource = document.getElementById('audio-source');
-const songTitle = document.getElementById('song-title');
-
-if (music) {
-    music.addEventListener('ended', function() {
-        currentSongIndex++;
-        
-        if (currentSongIndex < playlist.length) {
-            audioSource.src = playlist[currentSongIndex].src;
-            if (songTitle) songTitle.innerText = playlist[currentSongIndex].title;
-            
-            music.load();
-            music.play();
-        } else {
-            currentSongIndex = 0;
-            audioSource.src = playlist[0].src;
-            if (songTitle) songTitle.innerText = playlist[0].title;
-            music.load();
-            music.play();
-        }
-    });
 }
 </script>
 
